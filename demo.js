@@ -14,8 +14,8 @@ var end = 0;
 var iid = setInterval(function() {
   start = new Date().getTime();
   
-  //ad.read(channel);
-  	
+  ad.read(channel);
+  /*	
   ad.read(channel, function(err, adc, volt) {
   	end = new Date().getTime();
     if (err) {
@@ -25,5 +25,5 @@ var iid = setInterval(function() {
       console.log("adc: %s, volt: %s%%, time: %dms", adc[7].toFixed(2), volt[7].toFixed(2), end - start);
     }
   });
-  /**/
+  */
 }, 1000); // 2500
