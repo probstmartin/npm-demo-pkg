@@ -40,8 +40,6 @@ class ReadWorker : public Nan::AsyncWorker {
         argv[0] = Nan::Null();
       }
 
-      printf(argv[1]);
-
       callback->Call(3, argv);
     }
 
