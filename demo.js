@@ -19,7 +19,7 @@ var iid = setInterval(function() {
       console.warn('' + err);
     } else {
       var elapsed = end - start;
-      console.log("adc: %s, volt: %s%%, time: %dms", adc[7].toFixed(1), volt[7].toFixed(1), end - start);
+      console.log("adc: %8ld, volt: %03ld V, time: %dms", adc[7], volt[7], end - start);
     }
   });
 }, 1000); // 2500

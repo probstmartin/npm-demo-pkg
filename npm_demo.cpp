@@ -65,7 +65,7 @@ class ReadWorker : public Nan::AsyncWorker {
       int result = 0;
       while (true) {
         result = readADC(adc, volt);
-        printf("%8ld, %03ld V \r\n", adc[7], volt[7]);
+        //printf("%8ld, %03ld V \r\n", adc[7], volt[7]);
         if (result == 0 || --retry < 0) break;
         usleep(450000);
       }
