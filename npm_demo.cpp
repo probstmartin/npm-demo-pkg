@@ -15,9 +15,7 @@ int _max_retries = 3;
 
 class ReadWorker : public Nan::AsyncWorker {
   public:
-    ReadWorker(Nan::Callback *callback, int channel): Nan::AsyncWorker(callback), channel(channel) {
-
-    }
+    ReadWorker(Nan::Callback *callback, int channel): Nan::AsyncWorker(callback), channel(channel) { }
 
     void Execute() {
       printf("Enter Execute function... \n");
@@ -67,6 +65,7 @@ class ReadWorker : public Nan::AsyncWorker {
       int result = 0;
       while (true) {
         result = readADC(adc, volt);
+        printf("%8ld, %03ld V \r\n", adc[7], volt[7]);
         if (result == 0 || --retry < 0) break;
         usleep(450000);
       }
