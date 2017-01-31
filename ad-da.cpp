@@ -44,7 +44,6 @@
 
 
 
-
 #define ADS1256_DRAE_COUNT = 15;
 
 /* gain channel */
@@ -170,9 +169,8 @@ static const uint8_t s_tabDataRate[ADS1256_DRATE_MAX] =
 };
 
 int initialized = 0;
-unsigned long long last_read[32] = {};
-float last_temperature[32] = {};
-float last_humidity[32] = {};
+
+
 
 unsigned long long getTime()
 {
@@ -776,34 +774,33 @@ long readADC(int32_t adc[8], int32_t volt[8])
     ch_num = 8;
 
     while((ADS1256_Scan() == 0));
-        for (i = 0; i < ch_num; i++)
-        {
-            adc[i] = ADS1256_GetAdc(i);
-                 volt[i] = (adc[i] * 100) / 167;    
-        }
-        
-        for (i = 0; i < ch_num; i++)
-        {
-                    buf[0] = ((uint32_t)adc[i] >> 16) & 0xFF;
-                    buf[1] = ((uint32_t)adc[i] >> 8) & 0xFF;
-                    buf[2] = ((uint32_t)adc[i] >> 0) & 0xFF;
-                    printf("%d=%02X%02X%02X, %8ld", (int)i, (int)buf[0], 
-                           (int)buf[1], (int)buf[2], (long)adc[i]);                
+    for (i = 0; i < ch_num; i++)
+    {
+        adc[i] = ADS1256_GetAdc(i);
+        volt[i] = (adc[i] * 100) / 167;    
+    }
+    
+    for (i = 0; i < ch_num; i++)
+    {
+        buf[0] = ((uint32_t)adc[i] >> 16) & 0xFF;
+        buf[1] = ((uint32_t)adc[i] >> 8) & 0xFF;
+        buf[2] = ((uint32_t)adc[i] >> 0) & 0xFF;
+        printf("%d=%02X%02X%02X, %8ld", (int)i, (int)buf[0], (int)buf[1], (int)buf[2], (long)adc[i]);                
 
-                    iTemp = volt[i];    /* uV  */
-                    if (iTemp < 0)
-                    {
-                        iTemp = -iTemp;
-                                printf(" (-%ld.%03ld %03ld V) \r\n", iTemp /1000000, (iTemp%1000000)/1000, iTemp%1000);
-                    }
-                    else
-                    {
-                                    printf(" ( %ld.%03ld %03ld V) \r\n", iTemp /1000000, (iTemp%1000000)/1000, iTemp%1000);                    
-                    }
-                    
+        iTemp = volt[i];    /* uV  */
+        if (iTemp < 0)
+        {
+            iTemp = -iTemp;
+            printf(" (-%ld.%03ld %03ld V) \r\n", iTemp /1000000, (iTemp%1000000)/1000, iTemp%1000);
         }
-            printf("\33[%dA", (int)ch_num);  
-        bsp_DelayUS(100000);    
+        else
+        {
+            printf(" ( %ld.%03ld %03ld V) \r\n", iTemp /1000000, (iTemp%1000000)/1000, iTemp%1000);                    
+        }
+                
+    }
+    printf("\33[%dA", (int)ch_num);
+    bsp_DelayUS(100000);
 
     return 0;
 }
@@ -827,9 +824,9 @@ int initialize()
         initialized = 1;        
 
         bcm2835_spi_begin();
-        bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_LSBFIRST );      // The default
-        bcm2835_spi_setDataMode(BCM2835_SPI_MODE1);                   // The default
-        bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_1024); // The default
+        bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_LSBFIRST );       // The default
+        bcm2835_spi_setDataMode(BCM2835_SPI_MODE1);                     // The default
+        bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_1024);    // The default
         bcm2835_gpio_fsel(SPICS, BCM2835_GPIO_FSEL_OUTP);//
         bcm2835_gpio_write(SPICS, HIGH);
         bcm2835_gpio_fsel(DRDY, BCM2835_GPIO_FSEL_INPT);

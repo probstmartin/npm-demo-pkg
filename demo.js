@@ -11,6 +11,9 @@ var count = 0;
 var start = 0;
 var end = 0;
 
+
+ad.read(channel, function(err, adc, volt) {});
+/*
 var iid = setInterval(function() {
   start = new Date().getTime();
   ad.read(channel, function(err, adc, volt) {
@@ -23,3 +26,4 @@ var iid = setInterval(function() {
     }
   });
 }, 100); // 2500
+*/
