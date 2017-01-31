@@ -13,7 +13,7 @@ var end = 0;
 
 var iid = setInterval(function() {
   start = new Date().getTime();
-  ad.read(channel, function(err, adc[8], volt[8]) {
+  ad.read(channel, function(err, adc, volt) {
   	end = new Date().getTime();
     if (err) {
       console.warn('' + err);
