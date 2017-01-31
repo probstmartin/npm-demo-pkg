@@ -6,8 +6,6 @@ if (process.argv.length < 1) {
     process.exit(1);
 }
 
-console.log("1");
-
 var channel = parseInt(process.argv[0], 10);
 var count = 0;
 var start = 0;
@@ -15,9 +13,9 @@ var end = 0;
 
 var iid = setInterval(function() {
   start = new Date().getTime();
-  console.log("2");
+  console.log("1");
   ad.read(channel, function(err, adc, volt) {
-  console.log("3");
+  console.log("2");
   end = new Date().getTime();
     if (err) {
       console.warn('' + err);

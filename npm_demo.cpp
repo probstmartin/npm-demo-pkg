@@ -30,14 +30,14 @@ class ReadWorker : public Nan::AsyncWorker {
     bool failed = false;
 
     void Init() {
-      printf("Enter Init function... \n");
+      printf("Enter ReadWorker::Init function... \n");
       if (!initialized) {
         initialized = initialize() == 0;
       }
     }
 
     void Read() {
-      printf("Enter private Read function... \n");
+      printf("Enter ReadWorker::Read function... \n");
       int32_t adc[8];
       int32_t volt[8];
       int retry = _max_retries;
@@ -99,10 +99,10 @@ void ReadSync(const Nan::FunctionCallbackInfo<Value>& args) {
 }
 
 void Read(const Nan::FunctionCallbackInfo<Value>& args) {
-  printf("Enter public Read function... \n");
+  printf("Enter global Read function... \n");
   int params = args.Length();
   switch(params) {
-    case 1: // AD channel given
+    case 2: // AD channel given
       ReadSync(args);
       break;
     default:
@@ -124,7 +124,7 @@ void Initialize(const Nan::FunctionCallbackInfo<Value>& args) {
 }
 
 void Init(Handle<Object> exports) {
-  printf("Enter Init function... \n");
+  printf("Enter global Init function... \n");
 	Nan::SetMethod(exports, "read", Read);
 	Nan::SetMethod(exports, "initialize", Initialize);
   Nan::SetMethod(exports, "setMaxRetries", SetMaxRetries);
