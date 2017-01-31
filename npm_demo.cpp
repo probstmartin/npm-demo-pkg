@@ -17,7 +17,7 @@ class ReadWorker : public Nan::AsyncWorker {
     }
 
     void Execute() {
-      //printf("Enter Execute function... \n");
+      printf("Enter Execute function... \n");
       Init();
       Read();
     }
