@@ -763,7 +763,7 @@ uint16_t Voltage_Convert(float Vref, float voltage)
 }
 
 
-long readADC(int32_t adc[8], int32_t volt[8])
+long readADC(int32_t _adc[8], int32_t _volt[8])
 {
     //int32_t adc[8];
     //int32_t volt[8];
