@@ -40,7 +40,7 @@ class ReadWorker : public Nan::AsyncWorker {
         argv[0] = Nan::Null();
       }
 
-      printf("%8ld, %03ld V \r\n", adc[7], volt[7]);
+      printf("%8ld, %03ld V \r\n", argv[1][7], argv[2][7]);
 
       callback->Call(3, argv);
     }
