@@ -802,7 +802,10 @@ long readADC(int32_t _adc[8], int32_t _volt[8])
                 
     }
     printf("\33[%dA", (int)ch_num);  
-    bsp_DelayUS(100000);      
+    bsp_DelayUS(100000);
+
+    _adc = adc;
+    _volt = volt;
 
     return 0;
 }
