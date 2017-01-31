@@ -148,6 +148,7 @@ enum
 
 
 ADS1256_VAR_T g_tADS1256;
+
 static const uint8_t s_tabDataRate[ADS1256_DRATE_MAX] =
 {
     0xF0,       /*reset the default values  */
@@ -799,7 +800,7 @@ long readADC(int32_t adc[8], int32_t volt[8])
         }
                 
     }
-    printf("\33[%dA", (int)ch_num);
+    //printf("\33[%dA", (int)ch_num);
     bsp_DelayUS(100000);
 
     return 0;
