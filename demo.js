@@ -26,4 +26,4 @@ var iid = setInterval(function() {
     }
   });
   */
-}, 1000); // 2500
+}, 10); // 2500
