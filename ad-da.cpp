@@ -771,7 +771,6 @@ long readADC(int32_t adc[8], int32_t volt[8])
     int32_t iTemp;
     uint8_t buf[3];
 
-    ADS1256_StartScan(0);
     ch_num = 8;
 
     while((ADS1256_Scan() == 0));
@@ -800,7 +799,7 @@ long readADC(int32_t adc[8], int32_t volt[8])
         }
                 
     }
-    //printf("\33[%dA", (int)ch_num);
+    printf("\33[%dA", (int)ch_num);
     bsp_DelayUS(100000);
 
     return 0;
@@ -849,6 +848,7 @@ int initialize()
         }
 
         ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_15SPS);
+        ADS1256_StartScan(0);
 
         return 0;
     }
