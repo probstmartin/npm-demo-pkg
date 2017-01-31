@@ -31,7 +31,7 @@ class ReadWorker : public Nan::AsyncWorker {
       Nan:: HandleScope scope;
 
       Local<Value> argv[2];
-      argv[1] = Nan::New<Number>(channel),
+      argv[1] = Nan::New<Number>(channel);
 
       if (!initialized) {
         argv[0] = Nan::Error("failed to initialize ADC");
