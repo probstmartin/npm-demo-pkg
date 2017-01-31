@@ -63,7 +63,7 @@ void ReadSync(const Nan::FunctionCallbackInfo<Value>& args) {
   printf("Enter ReadSync function... \n");
   int channel;
 
-  if (args.Length() == 1) {
+  if (args.Length() == 2) {
     
     channel = args[0]->Uint32Value();
 
@@ -78,13 +78,15 @@ void ReadSync(const Nan::FunctionCallbackInfo<Value>& args) {
   } else {
     channel = _channel;
   }
-
+  printf("A...\n");
   int32_t adc[8];
   int32_t volt[8];
   int retry = _max_retries;
   int result = 0;
   while (true) {
+    printf("B...\n");
     result = readADC(adc, volt);
+    printf("C...\n");
     if (result == 0 || --retry < 0) break;
     usleep(450000);
   }
