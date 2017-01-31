@@ -772,7 +772,7 @@ long readADC(int32_t adc[8], int32_t volt[8])
     int32_t iTemp;
     uint8_t buf[3];
 
-    ADS1256_StartScan(1);
+    ADS1256_StartScan(0);
     ch_num = 8;
 
     while((ADS1256_Scan() == 0));
