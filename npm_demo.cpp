@@ -17,7 +17,7 @@ class ReadWorker : public Nan::AsyncWorker {
     }
 
     void Execute() {
-      printf("Enter Execute function... \n");
+      //printf("Enter Execute function... \n");
       Init();
       Read();
     }
@@ -30,14 +30,14 @@ class ReadWorker : public Nan::AsyncWorker {
     bool failed = false;
 
     void Init() {
-      printf("Enter ReadWorker::Init function... \n");
+      //printf("Enter ReadWorker::Init function... \n");
       if (!initialized) {
         initialized = initialize() == 0;
       }
     }
 
     void Read() {
-      printf("Enter ReadWorker::Read function... \n");
+      //printf("Enter ReadWorker::Read function... \n");
       int32_t adc[8];
       int32_t volt[8];
       int retry = _max_retries;
@@ -52,7 +52,7 @@ class ReadWorker : public Nan::AsyncWorker {
 };
 
 void ReadAsync(const Nan::FunctionCallbackInfo<Value>& args) {
-  printf("Enter ReadAsync function... \n");
+  //printf("Enter ReadAsync function... \n");
   int channel = Nan::To<int>(args[0]).FromJust();
   Nan::Callback *callback = new Nan::Callback(args[1].As<Function>());
 
@@ -60,7 +60,7 @@ void ReadAsync(const Nan::FunctionCallbackInfo<Value>& args) {
 }
 
 void ReadSync(const Nan::FunctionCallbackInfo<Value>& args) {
-  printf("Enter ReadSync function... \n");
+  //printf("Enter ReadSync function... \n");
   int channel;
 
   if (args.Length() == 2) {
@@ -78,15 +78,13 @@ void ReadSync(const Nan::FunctionCallbackInfo<Value>& args) {
   } else {
     channel = _channel;
   }
-  printf("A...\n");
+  
   int32_t adc[8];
   int32_t volt[8];
   int retry = _max_retries;
   int result = 0;
   while (true) {
-    printf("B...\n");
     result = readADC(adc, volt);
-    printf("C...\n");
     if (result == 0 || --retry < 0) break;
     usleep(450000);
   }
@@ -101,7 +99,7 @@ void ReadSync(const Nan::FunctionCallbackInfo<Value>& args) {
 }
 
 void Read(const Nan::FunctionCallbackInfo<Value>& args) {
-  printf("Enter global Read function... \n");
+  //printf("Enter global Read function... \n");
   int params = args.Length();
   switch(params) {
     case 2: // AD channel given
@@ -121,12 +119,12 @@ void SetMaxRetries(const Nan::FunctionCallbackInfo<Value>& args) {
 }
 
 void Initialize(const Nan::FunctionCallbackInfo<Value>& args) {
-  printf("Enter Initialize function... \n");
+  //printf("Enter Initialize function... \n");
 
 }
 
 void Init(Handle<Object> exports) {
-  printf("Enter global Init function... \n");
+  //printf("Enter global Init function... \n");
 	Nan::SetMethod(exports, "read", Read);
 	Nan::SetMethod(exports, "initialize", Initialize);
   Nan::SetMethod(exports, "setMaxRetries", SetMaxRetries);
