@@ -47,7 +47,7 @@
 
 #define ADS1256_DRAE_COUNT = 15;
 
-/* gain channelî */
+/* gain channel */
 typedef enum
 {
     ADS1256_GAIN_1          = (0),  /* GAIN   1 */
@@ -834,6 +834,7 @@ int initialize()
         bcm2835_gpio_write(SPICS, HIGH);
         bcm2835_gpio_fsel(DRDY, BCM2835_GPIO_FSEL_INPT);
         bcm2835_gpio_set_pud(DRDY, BCM2835_GPIO_PUD_UP);
+
 
         id = ADS1256_ReadChipID();
         #ifdef VERBOSE
