@@ -85,7 +85,7 @@ void ReadSync(const Nan::FunctionCallbackInfo<Value>& args) {
   //printf("Enter ReadSync function... \n");
   int channel;
 
-  if (args.Length() == 2) {
+  if (args.Length() == 1) {
     
     channel = args[0]->Uint32Value();
 
