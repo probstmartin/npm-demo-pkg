@@ -1,7 +1,7 @@
 var ad = require('./build/Release/npm_demo');
 
 
-f (process.argv.length < 1) {
+if (process.argv.length < 1) {
     console.warn(usage);
     process.exit(1);
 }
