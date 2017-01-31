@@ -1,0 +1,19 @@
+{
+  "name": "npm-demo-pkg",
+  "version": "1.0.0",
+  "description": "NPM Demo Package",
+  "main": "npm_demo",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/probstmartin/npm-demo-pkg.git"
+  },
+  "author": "Martin Probst",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/probstmartin/npm-demo-pkg/issues"
+  },
+  "homepage": "https://github.com/probstmartin/npm-demo-pkg#readme"
+}
