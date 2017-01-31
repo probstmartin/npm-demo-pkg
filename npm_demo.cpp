@@ -7,6 +7,8 @@ using namespace v8;
 
 extern int initialized;
 
+std::mutex sensorMutex;
+
 int _channel = 0; // default ADC channel
 int _max_retries = 3;
 
@@ -18,8 +20,10 @@ class ReadWorker : public Nan::AsyncWorker {
 
     void Execute() {
       printf("Enter Execute function... \n");
+      sensorMutex.lock();
       Init();
       Read();
+      sensorMutex.unlock();
     }
 
     void HandleOKCallback() {

@@ -22,4 +22,4 @@ var iid = setInterval(function() {
       console.log("adc: %s, volt: %s%%, time: %dms", adc[7].toFixed(1), volt[7].toFixed(1), end - start);
     }
   });
-}, 100); // 2500
+}, 1000); // 2500
