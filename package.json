@@ -10,6 +10,11 @@
     "type": "git",
     "url": "git+https://github.com/probstmartin/npm-demo-pkg.git"
   },
+  "scripts": {
+    "preinstall": "./check-lib.sh",
+    "install": "node-gyp configure",
+    "postinstall": "node-gyp build"
+  },
   "author": "Martin Probst",
   "license": "ISC",
   "bugs": {
