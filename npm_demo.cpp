@@ -104,8 +104,11 @@ void Read(const Nan::FunctionCallbackInfo<Value>& args) {
   //printf("Enter global Read function... \n");
   int params = args.Length();
   switch(params) {
-    case 2: // AD channel given
+    case 1: // AD channel given
       ReadSync(args);
+      break;
+    case 2: // AD channel + callback function given
+      ReadAsync(args);
       break;
     default:
       Nan::ThrowTypeError("invalid number of arguments");
