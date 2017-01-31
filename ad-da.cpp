@@ -763,10 +763,10 @@ uint16_t Voltage_Convert(float Vref, float voltage)
 }
 
 
-long readADC(int32_t _adc[8], int32_t _volt[8])
+long readADC(int32_t adc[8], int32_t volt[8])
 {
-    int32_t adc[8];
-    int32_t volt[8];
+    //int32_t adc[8];
+    //int32_t volt[8];
     uint8_t i;
     uint8_t ch_num;
     int32_t iTemp;
@@ -801,11 +801,8 @@ long readADC(int32_t _adc[8], int32_t _volt[8])
         }
                 
     }
-    printf("\33[%dA", (int)ch_num);  
+    printf("\33[%dA", (int)ch_num);
     bsp_DelayUS(100000);
-
-    _adc = adc;
-    _volt = volt;
 
     return 0;
 }
