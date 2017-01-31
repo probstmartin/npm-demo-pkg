@@ -1,6 +1,7 @@
 #include <node.h>
 #include <nan.h>
 #include <unistd.h>
+#include <mutex>
 #include "ad-da.h"
 
 using namespace v8;
