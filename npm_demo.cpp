@@ -86,8 +86,8 @@ void ReadSync(const Nan::FunctionCallbackInfo<Value>& args) {
   }
 
   Local<Object> readout = Nan::New<Object>();
-  //readout->Set(Nan::New("humidity").ToLocalChecked(), Nan::New<Number>(humidity));
-  //readout->Set(Nan::New("temperature").ToLocalChecked(), Nan::New<Number>(temperature));
+  readout->Set(Nan::New("adc").ToLocalChecked(), Nan::New<Array>(*adc));
+  readout->Set(Nan::New("volt").ToLocalChecked(), Nan::New<Array>(*volt));
   readout->Set(Nan::New("isValid").ToLocalChecked(), Nan::New<Boolean>(result == 0));
   readout->Set(Nan::New("errors").ToLocalChecked(), Nan::New<Number>(_max_retries - retry));
 
