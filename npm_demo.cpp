@@ -26,11 +26,26 @@ class ReadWorker : public Nan::AsyncWorker {
 
   private:
     int channel;
+    bool failed = false;
 
     void Init() {
+      if (!initialized) {
+        initialized = initialize() == 0;
+      }
     }
 
     void Read() {
+
+      int32_t adc[8];
+      int32_t volt[8];
+      int retry = _max_retries;
+      int result = 0;
+      while (true) {
+        result = readADC(adc, volt);
+        if (result == 0 || --retry < 0) break;
+        usleep(450000);
+      }
+      failed = result != 0;
     }
 };
 
@@ -62,7 +77,6 @@ void ReadSync(const Nan::FunctionCallbackInfo<Value>& args) {
 
   int32_t adc[8];
   int32_t volt[8];
-
   int retry = _max_retries;
   int result = 0;
   while (true) {
@@ -72,8 +86,8 @@ void ReadSync(const Nan::FunctionCallbackInfo<Value>& args) {
   }
 
   Local<Object> readout = Nan::New<Object>();
-  readout->Set(Nan::New("humidity").ToLocalChecked(), Nan::New<Number>(humidity));
-  readout->Set(Nan::New("temperature").ToLocalChecked(), Nan::New<Number>(temperature));
+  //readout->Set(Nan::New("humidity").ToLocalChecked(), Nan::New<Number>(humidity));
+  //readout->Set(Nan::New("temperature").ToLocalChecked(), Nan::New<Number>(temperature));
   readout->Set(Nan::New("isValid").ToLocalChecked(), Nan::New<Boolean>(result == 0));
   readout->Set(Nan::New("errors").ToLocalChecked(), Nan::New<Number>(_max_retries - retry));
 
