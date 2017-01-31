@@ -30,8 +30,9 @@ class ReadWorker : public Nan::AsyncWorker {
     void HandleOKCallback() {
       Nan:: HandleScope scope;
 
-      Local<Value> argv[2];
-      argv[1] = Nan::New<Number>(channel);
+      Local<Value> argv[3];
+      argv[1] = Nan::New<Array>(adc),
+      argv[2] = Nan::New<Array>(volt);
 
       if (!initialized) {
         argv[0] = Nan::Error("failed to initialize ADC");
@@ -41,11 +42,13 @@ class ReadWorker : public Nan::AsyncWorker {
         argv[0] = Nan::Null();
       }
 
-      callback->Call(2, argv);
+      callback->Call(3, argv);
     }
 
   private:
     int channel;
+    int32_t adc[8];
+    int32_t volt[8];
     bool failed = false;
 
     void Init() {
@@ -57,8 +60,9 @@ class ReadWorker : public Nan::AsyncWorker {
 
     void Read() {
       //printf("Enter ReadWorker::Read function... \n");
-      int32_t adc[8];
-      int32_t volt[8];
+
+      //todo init adc and volt
+
       int retry = _max_retries;
       int result = 0;
       while (true) {
