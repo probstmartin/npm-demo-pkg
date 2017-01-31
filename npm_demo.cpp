@@ -28,7 +28,7 @@ class ReadWorker : public Nan::AsyncWorker {
     void HandleOKCallback() {
       Nan:: HandleScope scope;
 
-      Local<Value> argv[3];
+      Local<Array> argv[3];
       argv[1] = Nan::New<Array>(*adc),
       argv[2] = Nan::New<Array>(*volt);
 
@@ -40,7 +40,7 @@ class ReadWorker : public Nan::AsyncWorker {
         argv[0] = Nan::Null();
       }
 
-      printf("%8ld, %03ld V \r\n", argv[1][7], argv[2][7]);
+      printf("%8ld, %03ld V \r\n", argv[1], argv[2]);
 
       callback->Call(3, argv);
     }
