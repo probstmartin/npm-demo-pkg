@@ -89,7 +89,7 @@ void ReadSync(const Nan::FunctionCallbackInfo<Value>& args) {
     usleep(450000);
   }
 
-  printf("%8ld, %03ld V \r\n", adc[0], volt[0]);
+  printf("%8ld, %03ld V \r\n", adc[7], volt[7]);
 
   Local<Object> readout = Nan::New<Object>();
   readout->Set(Nan::New("adc").ToLocalChecked(), Nan::New<Array>(*adc));
