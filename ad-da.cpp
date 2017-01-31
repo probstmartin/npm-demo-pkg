@@ -851,6 +851,8 @@ int initialize()
 
         ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_15SPS);
 
+        initialized = 1;
+
         return 0;
     }
 }

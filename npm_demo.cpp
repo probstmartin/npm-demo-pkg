@@ -17,6 +17,7 @@ class ReadWorker : public Nan::AsyncWorker {
     }
 
     void Execute() {
+      printf("Enter Execute function... \n");
       Init();
       Read();
     }
@@ -29,13 +30,14 @@ class ReadWorker : public Nan::AsyncWorker {
     bool failed = false;
 
     void Init() {
+      printf("Enter Init function... \n");
       if (!initialized) {
         initialized = initialize() == 0;
       }
     }
 
     void Read() {
-
+      printf("Enter private Read function... \n");
       int32_t adc[8];
       int32_t volt[8];
       int retry = _max_retries;
@@ -50,6 +52,7 @@ class ReadWorker : public Nan::AsyncWorker {
 };
 
 void ReadAsync(const Nan::FunctionCallbackInfo<Value>& args) {
+  printf("Enter ReadAsync function... \n");
   int channel = Nan::To<int>(args[0]).FromJust();
   Nan::Callback *callback = new Nan::Callback(args[1].As<Function>());
 
@@ -57,6 +60,7 @@ void ReadAsync(const Nan::FunctionCallbackInfo<Value>& args) {
 }
 
 void ReadSync(const Nan::FunctionCallbackInfo<Value>& args) {
+  printf("Enter ReadSync function... \n");
   int channel;
 
   if (args.Length() == 1) {
@@ -95,7 +99,7 @@ void ReadSync(const Nan::FunctionCallbackInfo<Value>& args) {
 }
 
 void Read(const Nan::FunctionCallbackInfo<Value>& args) {
-  printf("Enter Read function... \n");
+  printf("Enter public Read function... \n");
   int params = args.Length();
   switch(params) {
     case 1: // AD channel given
