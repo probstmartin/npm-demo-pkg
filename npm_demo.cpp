@@ -28,12 +28,10 @@ class ReadWorker : public Nan::AsyncWorker {
     void HandleOKCallback() {
       Nan:: HandleScope scope;
 
-      v8::Local<v8::Array> results = Nan::New<v8::Array>(volt.size());
-      int i = 0;
-      for_each(volt.begin(), volt.end(), [&](int32_t value) {
-        Nan::Set(results, i, Nan::New<v8::Number>(value));
-        i++;
-      });
+      v8::Local<v8::Array> results = Nan::New<v8::Array>(8);
+      for (int i = 0; i<8; i++) {
+        Nan::Set(results, i, Nan::New<v8::Number>(volt[i]));
+      }
 
       Local<Value> argv[] = { Null(), results };
       callback->Call(2, argv);
