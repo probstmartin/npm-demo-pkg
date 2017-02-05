@@ -21,9 +21,12 @@ var iid = setInterval(function() {
     if (err) {
       console.warn('' + err);
     } else {
-      var elapsed = end - start;
-      console.log(volt);
-      //console.log("adc: %s, volt: %s%%, time: %dms", adc[7].toFixed(2), volt[7].toFixed(2), end - start);
+    	var elapsed = end - start;
+     	for(var i = 0, length = volt.length; i < length; i++){
+    		volt[i] /= 1000000;
+      	}
+      	console.log(volt);
+      	//console.log("adc: %s, volt: %s%%, time: %dms", adc[7].toFixed(2), volt[7].toFixed(2), end - start);
     }
   });
   /**/

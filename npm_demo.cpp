@@ -30,7 +30,7 @@ class ReadWorker : public Nan::AsyncWorker {
 
       v8::Local<v8::Array> results = Nan::New<v8::Array>(8);
       for (int i = 0; i<8; i++) {
-        Nan::Set(results, i, Nan::New<v8::Number>(volt[i]/1000000));
+        Nan::Set(results, i, Nan::New<v8::Number>(volt[i]));
       }
 
       Local<Value> argv[] = { Nan::Null(), results };
