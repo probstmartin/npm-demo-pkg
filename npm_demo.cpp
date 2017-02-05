@@ -33,7 +33,7 @@ class ReadWorker : public Nan::AsyncWorker {
         Nan::Set(results, i, Nan::New<v8::Number>(volt[i]));
       }
 
-      Local<Value> argv[] = { Null, results };
+      Local<Value> argv[] = { Nan::Null(), results };
       callback->Call(2, argv);
 
 /*
