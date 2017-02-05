@@ -18,7 +18,7 @@ class ReadWorker : public Nan::AsyncWorker {
     ReadWorker(Nan::Callback *callback, int channel): Nan::AsyncWorker(callback), channel(channel) { }
 
     void Execute() {
-      printf("Enter Execute function... \n");
+      // printf("Enter Execute function... \n");
       sensorMutex.lock();
       Init();
       Read();
